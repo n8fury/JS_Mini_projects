@@ -28,7 +28,7 @@ body {
 }
 
 .quote-text {
-  font-size: 2.75rem;
+  font-size: 2.35rem;
   font-weight: 700;
   color: #000000;
   margin-bottom: 20px;
@@ -37,11 +37,11 @@ body {
 .fa-quote-left,
 .fa-quote-right {
   padding: 0px 15px;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .quote-author {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #000000;
   margin-bottom: 20px;
@@ -58,10 +58,11 @@ button {
   cursor: pointer;
   font-size: 1.5rem;
   height: 2.5rem;
-  border: none;
+  /* border: none; */
+  border-color: #000;
   border-radius: 10px;
-  color: #ffffff;
-  background-color: #333;
+  color: #000;
+  background-color: #fff;
   outline: none;
   padding: 0px 20px;
   box-shadow: 0rem 0.3rem rgba(0, 0, 0, 0.45);
@@ -70,6 +71,8 @@ button {
 
 button:hover {
   filter: brightness(1.2);
+  color:#fff;
+  background-color: #000;
 }
 
 button:active {
