@@ -3,30 +3,47 @@ const quoteText = document.getElementById("quote");
 const quoteAuthor = document.getElementById("author");
 const twitterButton = document.getElementById("twitter-button");
 const newQuoteButton = document.getElementById("new-quote");
+const loader = document.getElementById("loader");
+
+
 
 let quote = [];
+// loading animation
+function loading() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+function loader_complete() {
+  loader.hidden = true;
+  quoteContainer.hidden = false;
+}
 // select random quote from array of quotes
 function newQuote() {
+  loading();
   const randomQuote = quote[Math.floor(Math.random() * quote.length)];
-  quoteText.textContent = randomQuote.text;
+
   if (!randomQuote.author) {
     quoteAuthor.textContent = "Unknown";
   } else {
     quoteAuthor.textContent = randomQuote.author;
   }
+  quoteText.textContent = randomQuote.text;
+  loader_complete();
 }
 // select random quote from local array of quotes
 function localQuote() {
   const localQuote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
-  quoteText.textContent = localQuote.text;
   if (!localQuote.author) {
     quoteAuthor.textContent = "Unknown";
   } else {
     quoteAuthor.textContent = localQuote.author;
   }
+  quoteText.textContent = localQuote.text;
 }
 // fetching quotes from api
 async function getQuote() {
+  loading();
   try {
     const response = await fetch("https://type.fit/api/quotes");
     quote = await response.json();
@@ -41,8 +58,9 @@ function tweetQuote() {
   window.open(tweetUrl, "_blank");
 }
 
-
-getQuote();
 // event_listeners
 newQuoteButton.addEventListener("click", newQuote);
 twitterButton.addEventListener("click", tweetQuote);
+
+
+getQuote();
