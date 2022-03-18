@@ -33,6 +33,7 @@ function newQuote() {
 }
 // select random quote from local array of quotes
 function localQuote() {
+  loading();
   const localQuote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
   if (!localQuote.author) {
     quoteAuthor.textContent = "Unknown";
@@ -40,6 +41,7 @@ function localQuote() {
     quoteAuthor.textContent = localQuote.author;
   }
   quoteText.textContent = localQuote.text;
+  loader_complete();
 }
 // fetching quotes from api
 async function getQuote() {
