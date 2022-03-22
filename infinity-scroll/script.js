@@ -4,19 +4,39 @@ let photosArray = [];
 let loaded_photos = 0;
 let total_photos = 0;
 let images_loaded = false;
+let index = 3;
 // Api(UNSPLASH)
-const apiKey = 'zk-c3koRKsWJveqTao84FGHFruXOaqN2BhbavpV5fzA';
-const count = 30;
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
-// to view loading_animation
-function loading_animation() {
-  
-}
+const apiKey = [
+  'zk-c3koRKsWJveqTao84FGHFruXOaqN2BhbavpV5fzA',
+  'O6g1epYBncX_p19uDToM5hDFpBxeNfZHRow6vFIPqt4',
+  't_4J4GMWETZ55kdAKMuaQ9IYnazVh0UhzFaTX-RDWZQ',
+  'nA_69PX80YlXN3kYA76PuvYjeAGUkyHdaXnAE1gkvBU'
+];
+// Fetching data from the API
+async function getPhotos() {
 
+  try {
+    const res = await fetch(apiUrl);
+    const photosArray = await res.json();
+    displayPhotos(photosArray);
+  } catch (error) {}
+}
+const count = 30;
+const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey[index]}&count=${count}`;
+// to reset api_key count
+function reset_api_key() {
+  if (index < 3) {
+    index++;
+  } else {
+    index = 0;
+  }
+}
 // check if all images are loaded or not
 function load_check() {
   loaded_photos++;
   if (loaded_photos === total_photos) {
+    // to hide the loader
+    loader.hidden = true;
     images_loaded = true;
   }
 }
@@ -51,20 +71,15 @@ function displayPhotos(array) {
     photoContainer.appendChild(anchor);
   });
 }
-// Fetching data from the API
-async function getPhotos() {
-  try {
-    const res = await fetch(apiUrl);
-    const photosArray = await res.json();
-    displayPhotos(photosArray);
-  } catch (error) {
-
-  }
-}
 getPhotos();
+console.log(index);
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800 && images_loaded) {
     getPhotos();
+    index++;
+    reset_api_key();
+    console.log(index);
+    console.log(apiKey[index]);
     images_loaded = false;
     loaded_photos = 0;
   }
