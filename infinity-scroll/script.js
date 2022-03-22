@@ -1,10 +1,10 @@
-const photoContainer = document.getElementById("photo-container");
-const loader = document.getElementById("loader");
 let photosArray = [];
 let loaded_photos = 0;
 let total_photos = 0;
 let images_loaded = false;
 let index = 3;
+const photoContainer = document.getElementById("photo-container");
+const loader = document.getElementById("loader");
 // Api(UNSPLASH)
 const apiKey = [
   'zk-c3koRKsWJveqTao84FGHFruXOaqN2BhbavpV5fzA',
@@ -12,23 +12,25 @@ const apiKey = [
   't_4J4GMWETZ55kdAKMuaQ9IYnazVh0UhzFaTX-RDWZQ',
   'nA_69PX80YlXN3kYA76PuvYjeAGUkyHdaXnAE1gkvBU'
 ];
+const count = 30;
+let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey[index]}&count=${count}`;
 // Fetching data from the API
 async function getPhotos() {
-
   try {
     const res = await fetch(apiUrl);
     const photosArray = await res.json();
     displayPhotos(photosArray);
-  } catch (error) {}
+  } catch (error) {
+    index++;
+    reset_api_key();
+  }
 }
-const count = 30;
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey[index]}&count=${count}`;
 // to reset api_key count
 function reset_api_key() {
-  if (index < 3) {
-    index++;
-  } else {
+  if (index > 3) {
     index = 0;
+  } else {
+    index++;
   }
 }
 // check if all images are loaded or not
@@ -72,14 +74,9 @@ function displayPhotos(array) {
   });
 }
 getPhotos();
-console.log(index);
 window.addEventListener("scroll", () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800 && images_loaded) {
     getPhotos();
-    index++;
-    reset_api_key();
-    console.log(index);
-    console.log(apiKey[index]);
     images_loaded = false;
     loaded_photos = 0;
   }
