@@ -12,7 +12,7 @@ const apiKey = [
   't_4J4GMWETZ55kdAKMuaQ9IYnazVh0UhzFaTX-RDWZQ',
   'nA_69PX80YlXN3kYA76PuvYjeAGUkyHdaXnAE1gkvBU'
 ];
-const count = 30;
+const count = 5;
 let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey[index]}&count=${count}`;
 // Fetching data from the API
 async function getPhotos() {
@@ -40,6 +40,7 @@ function load_check() {
     // to hide the loader
     loader.hidden = true;
     images_loaded = true;
+    count = 30;
   }
 }
 // set_attribute function
