@@ -22,4 +22,4 @@ video_button.addEventListener('click', async () => {
 });
 
 
-selectMediaStream();
+selectMediaStream();// select media stream in the very beginning
