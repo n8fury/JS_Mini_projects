@@ -17,3 +17,29 @@ html {
   background-position: left center;
   background-repeat: no-repeat;
 }
+
+button {
+  background: #cf1030;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+  box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    background-size: cover;
+    background-position: center center;
+   
+  }
+  button{
+     box-shadow: 5px 5px 30px 30px rgba(0, 0, 0, 0.3);
+  }
+}
